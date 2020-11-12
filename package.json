@@ -7,7 +7,7 @@
   "private": true,
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test && yarn lint"
+      "pre-commit": "yarn lint"
     }
   },
   "scripts": {
@@ -26,7 +26,6 @@
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
@@ -34,7 +33,6 @@
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "@babel/register": "^7.9.0",
-    "@types/redux-state-sync": "^3.1.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
     "babel-polyfill": "^6.26.0",
