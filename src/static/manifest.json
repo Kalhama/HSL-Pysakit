@@ -1,0 +1,13 @@
+{
+    "name": "Superlist",
+    "short_name": "Superlist",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fff",
+    "icons": [
+        {
+            "src": "/icon.png",
+            "sizes": "192x192 512x512"
+        }
+    ]
+}

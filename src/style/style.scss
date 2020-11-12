@@ -1,0 +1,54 @@
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "~normalize.css/normalize.css";
+
+$dark-blue: #007AC8;
+$white-blue: #BCE4F7;
+$white: white;
+
+@font-face {
+    font-family: 'Hero';
+    src: url("Hero/hero.otf") format("opentype");
+}
+
+body {
+    font-family: 'Hero';
+    background-color: $dark-blue;
+    color: $white;
+}
+
+h2 {
+    font-size: 4em;
+}
+
+#main {
+    display: flex;
+}
+
+#hsl {
+    flex: 1 1 0px;
+
+    .shortName {
+        text-align: right;
+    }
+}
+
+#weather {
+    flex: 1 1 0px;
+}
+
+#clock {
+    text-align: center;
+}
+
+#kitty {
+    background-image: url('kitty.gif');
+    background-size: cover;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 300px;
+    width: 200px;
+}

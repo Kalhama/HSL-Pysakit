@@ -1,0 +1,65 @@
+{
+  "name": "superlist-web-client",
+  "version": "1.0.0",
+  "repository": "git@github.com:felixbade/superlist.git",
+  "author": "Felix Bade",
+  "license": "UNLICENSED",
+  "private": true,
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test && yarn lint"
+    }
+  },
+  "scripts": {
+    "start": "webpack-dev-server --env development --colors --mode=development --open",
+    "build": "webpack --progress --colors --mode=production",
+    "deploy:production": "yarn test && sh ./scripts/deploy-production.sh",
+    "deploy:staging": "yarn test && sh ./scripts/deploy-staging.sh",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.2.5",
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "axios": "^0.21.0",
+    "graphql": "^15.4.0",
+    "moment": "^2.29.1",
+    "normalize.css": "^8.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/register": "^7.9.0",
+    "@types/redux-state-sync": "^3.1.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.2.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.4.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "file-loader": "^6.0.0",
+    "husky": "^4.2.5",
+    "mini-css-extract-plugin": "^0.9.0",
+    "mocha": "^7.1.2",
+    "node-sass": "^4.14.1",
+    "prettier": "^2.0.2",
+    "resolve-url-loader": "^3.1.1",
+    "sass-loader": "^8.0.2",
+    "serviceworker-webpack-plugin": "^1.0.1",
+    "style-loader": "^1.1.3",
+    "url-loader": "^4.0.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
