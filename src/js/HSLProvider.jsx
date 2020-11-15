@@ -9,7 +9,7 @@ const STOP_DATA = gql`
     {
         stop(id: "HSL:${STOP_ID}") {
             name
-            stoptimesWithoutPatterns(numberOfDepartures: 6) {
+            stoptimesWithoutPatterns(numberOfDepartures: 8) {
                 realtimeDeparture
                 realtime
                 headsign

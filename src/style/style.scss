@@ -17,12 +17,14 @@ body {
     font-family: 'Hero';
     background-color: $dark-blue;
     color: $white;
+
 }
 
 
 #hsl {
     padding: 0 1em;
-    border-bottom: 2px solid $white;
+    height: calc(100vh - 18em);
+    overflow: scroll;
 
     table {
         width: 100%;
@@ -77,9 +79,9 @@ body {
     background-size: cover;
     position: fixed;
     right: 0;
-    bottom: 0;
-    height: 300px;
-    width: 200px;
+    bottom: 9em;
+    height: 18em;
+    width: 12em;
 }
 
 #weather {
@@ -87,6 +89,11 @@ body {
     display: flex;
     text-align: center;
     overflow: scroll;
+    position: fixed;
+    bottom: 0;
+    border-top: 2px solid $white;
+    background-color: $dark-blue;
+    
     .hour {
         margin-right: 0.7em;
         display: flex;
