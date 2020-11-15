@@ -1,7 +1,7 @@
 {
-  "name": "superlist-web-client",
+  "name": "eteisen-infonaytto",
   "version": "1.0.0",
-  "repository": "git@github.com:felixbade/superlist.git",
+  "repository": "https://bitbucket.org/maxkalhama/eteisen-infonaytto/",
   "author": "Felix Bade",
   "license": "UNLICENSED",
   "private": true,

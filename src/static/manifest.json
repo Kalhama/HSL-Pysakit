@@ -1,12 +1,11 @@
 {
-    "name": "Superlist",
-    "short_name": "Superlist",
+    "name": "HSL Weather",
+    "short_name": "HSL Weather",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#fff",
     "icons": [
         {
-            "src": "/icon.png",
             "sizes": "192x192 512x512"
         }
     ]
