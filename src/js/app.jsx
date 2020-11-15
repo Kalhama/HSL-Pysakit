@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { HSLProvider } from './HSLProvider'
+import { HSLProvider } from './HSL'
 import { Clock } from './Clock'
 import { ApolloProvider } from '@apollo/client'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { WeatherProvider } from './WeatherProvider'
-import * as moment from 'moment'
+import { WeatherProvider } from './Weather'
+import moment from 'moment'
 import { Kitty } from './Kitty'
 
 moment.locale('fi')
