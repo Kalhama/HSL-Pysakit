@@ -13,8 +13,7 @@
   "scripts": {
     "start": "webpack-dev-server --env development --colors --mode=development --open",
     "build": "webpack --progress --colors --mode=production",
-    "deploy:production": "yarn test && sh ./scripts/deploy-production.sh",
-    "deploy:staging": "yarn test && sh ./scripts/deploy-staging.sh",
+    "deploy": "sh ./scripts/deploy-production.sh",
     "lint": "eslint src/"
   },
   "dependencies": {
