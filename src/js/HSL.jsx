@@ -1,23 +1,25 @@
 import React from 'react'
-import * as moment from 'moment'
+import moment from 'moment'
 
-export function HSL({ stoptimesWithoutPatterns, stopName }) {
+export function HSL({ stoptimesWithoutPatterns }) {
     return (
-        <div>
-            <h2>{stopName}</h2>
-            <table>
-                <tbody>
-                    {stoptimesWithoutPatterns.map((stoptime) => {
-                        return (
-                            <tr key={Math.random()}>
-                                <td>{moment(stoptime.realtimeDeparture).diff(moment(), 'minutes')} min</td>
-                                <td className="shortName">{stoptime.shortName}</td>
-                                <td>{stoptime.headsign}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-        </div>
+        <table>
+            <tbody>
+                {stoptimesWithoutPatterns.map((stoptime) => {
+                    const departureIn = moment(stoptime.realtimeDeparture).diff(moment(), 'minutes')
+
+                    const displayDepTime = departureIn === 0 ? 'Nyt' : `${departureIn} min`
+                    return (
+                        <tr key={Math.random()}>
+                            <td className="shortName">{stoptime.shortName}</td>
+                            <td>{stoptime.headsign}</td>
+                            <td className="departure">
+                                <div>{displayDepTime}</div>
+                            </td>
+                        </tr>
+                    )
+                })}
+            </tbody>
+        </table>
     )
 }

@@ -19,28 +19,57 @@ body {
     color: $white;
 }
 
-h2 {
-    font-size: 4em;
-}
-
-#main {
-    display: flex;
-}
 
 #hsl {
-    flex: 1 1 0px;
+    padding: 0 1em;
+    border-bottom: 2px solid $white;
+
+    table {
+        width: 100%;
+        box-sizing: border-box;
+
+        padding: 1em;
+        font-size: 1.5em;
+        border-collapse: collapse;
+        
+
+        td {
+            padding: 0.5em 0;
+            border-bottom: 1px solid rgba($color: $white-blue, $alpha: 0.2);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    }
 
     .shortName {
-        text-align: right;
+        width: 5%;
+        font-weight: bold;
+    }
+
+    .departure {
+        width: 5em;
+
+        div {
+            background-color: white;
+            border-radius: 0.3em;
+            text-align: center;
+            color: $dark-blue;
+            font-weight: bold;
+            padding: 0.5em;
+        }
     }
 }
 
-#weather {
-    flex: 1 1 0px;
-}
-
 #clock {
-    text-align: center;
+    border-bottom: 2px solid $white;
+
+    h2 {
+        text-align: center;
+        margin: 0.5em;
+        font-size: 4em;
+    }
 }
 
 #kitty {

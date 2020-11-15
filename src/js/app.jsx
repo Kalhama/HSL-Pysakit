@@ -20,10 +20,8 @@ export default class App extends React.Component {
         return (
             <ApolloProvider client={client}>
                 <Clock />
-                <div id="main">
-                    <HSLProvider />
-                    <WeatherProvider />
-                </div>
+                <HSLProvider />
+                <WeatherProvider />
                 <Kitty />
             </ApolloProvider>
         )
