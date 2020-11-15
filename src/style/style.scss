@@ -22,8 +22,7 @@ body {
 
 
 #hsl {
-    padding: 0 1em;
-    height: calc(100vh - 18em);
+    padding: 0 1em 10em 1em;
     overflow: scroll;
 
     table {
@@ -75,6 +74,10 @@ body {
         text-align: center;
         margin: 0.5em 0;
         font-size: 4em;
+
+        @media screen and (max-width: 760px) { 
+            font-size: 7.5vw;    
+        } 
     }
 }
 
@@ -99,6 +102,9 @@ body {
     overflow: scroll;
     border-top: 2px solid $white;
     background-color: $dark-blue;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     
     .hour {
         margin-right: 0.7em;
