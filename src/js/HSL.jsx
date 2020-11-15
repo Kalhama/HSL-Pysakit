@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import moment from 'moment'
 import { useQuery, gql } from '@apollo/client'
+import { GiphyProvider } from './Giphy'
 
 function HSL({ stoptimesWithoutPatterns }) {
+    if (stoptimesWithoutPatterns.length === 0) {
+        return (
+            <Fragment>
+                <h2>No buses leaving next 60min</h2>
+                <GiphyProvider />
+            </Fragment>
+        )
+    }
+
     return (
         <table>
             <tbody>
@@ -49,8 +59,19 @@ const STOP_DATA = gql`
 export function HSLProvider() {
     const { loading, error, data } = useQuery(STOP_DATA, { pollInterval: 10 * 1000 })
 
-    if (loading) return <div id="hsl">Loading...</div>
-    if (error) return <div id="hsl">Error :(</div>
+    if (loading)
+        return (
+            <div id="hsl">
+                <h2>Loading...</h2>
+            </div>
+        )
+    if (error)
+        return (
+            <div id="hsl">
+                <h2>Error with HSL API :(</h2>
+                <GiphyProvider search={'error'} />
+            </div>
+        )
 
     const stoptimesWithoutPatterns = data.stop.stoptimesWithoutPatterns
         .map((stoptime) => {

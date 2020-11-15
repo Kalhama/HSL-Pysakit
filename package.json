@@ -19,6 +19,7 @@
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "@fortawesome/fontawesome-free": "^5.15.1",
+    "@giphy/js-fetch-api": "^2.0.0-alpha.0",
     "axios": "^0.21.0",
     "graphql": "^15.4.0",
     "moment": "^2.29.1",
