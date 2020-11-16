@@ -17,9 +17,11 @@ function HSL({ stoptimesWithoutPatterns }) {
         <table>
             <tbody>
                 {stoptimesWithoutPatterns.map((stoptime) => {
-                    const departureIn = moment(stoptime.realtimeDeparture).diff(moment(), 'minutes')
+                    const departureIn = moment(stoptime.realtimeDeparture)
+                        .subtract(20, 'seconds')
+                        .diff(moment(), 'minutes')
 
-                    const displayDepTime = departureIn === 0 ? 'Nyt' : `${departureIn} min`
+                    const displayDepTime = departureIn <= 0 ? 'Nyt' : `${departureIn} min`
                     return (
                         <tr key={Math.random()}>
                             <td className="shortName">{stoptime.shortName}</td>
