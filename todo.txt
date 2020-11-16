@@ -1,2 +1,3 @@
 vaida luxoniin
 jos bussinäkymä on scrollattu reverttaa scrolli vähän ajan päästä
+sääikonit vois kopsata osaksi repoa
