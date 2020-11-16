@@ -22,7 +22,10 @@ function Giphy({ images }) {
         }
     }, [])
 
-    if (!gif) return 'no gifs'
+    if (!gif) {
+        console.error('no gifs')
+        return null
+    }
     return <video autoPlay={true} loop={true} src={gif} />
 }
 
@@ -41,7 +44,7 @@ export function GiphyProvider({ search }) {
 
             const options = { type: 'gifs', limit: 50, offset }
 
-            const gfPromise = search ? gf.search(search, options) : gf.trending(options)
+            const gfPromise = search ? gf.search(search, options) : gf.search('meme', options)
 
             gfPromise
                 .then((res) => {
