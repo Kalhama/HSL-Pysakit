@@ -21,7 +21,16 @@ function HSL({ stoptimesWithoutPatterns }) {
                         .subtract(20, 'seconds')
                         .diff(moment(), 'minutes')
 
-                    const displayDepTime = departureIn <= 0 ? 'Nyt' : `${departureIn} min`
+                    let displayDepTime
+
+                    if (departureIn <= 0) {
+                        displayDepTime = 'Nyt'
+                    } else if (departureIn <= 25) {
+                        displayDepTime = `${departureIn} min`
+                    } else {
+                        displayDepTime = moment(stoptime.realtimeDeparture).format('HH:mm')
+                    }
+
                     return (
                         <tr key={Math.random()}>
                             <td className="shortName">{stoptime.shortName}</td>
@@ -75,16 +84,14 @@ export function HSLProvider() {
             </div>
         )
 
-    const stoptimesWithoutPatterns = data.stop.stoptimesWithoutPatterns
-        .map((stoptime) => {
-            return {
-                realtime: stoptime.realtime,
-                shortName: stoptime.trip.route.shortName,
-                headsign: stoptime.headsign,
-                realtimeDeparture: (stoptime.realtimeDeparture + stoptime.serviceDay) * 1000
-            }
-        })
-        .filter((stoptime) => moment(stoptime.realtimeDeparture).diff(moment(), 'minutes') < 60)
+    const stoptimesWithoutPatterns = data.stop.stoptimesWithoutPatterns.map((stoptime) => {
+        return {
+            realtime: stoptime.realtime,
+            shortName: stoptime.trip.route.shortName,
+            headsign: stoptime.headsign,
+            realtimeDeparture: (stoptime.realtimeDeparture + stoptime.serviceDay) * 1000
+        }
+    })
 
     return (
         <div id="hsl">
