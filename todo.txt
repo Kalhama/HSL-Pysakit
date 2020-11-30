@@ -1,3 +1,4 @@
-vaida luxoniin
-jos bussinäkymä on scrollattu reverttaa scrolli vähän ajan päästä
-sääikonit vois kopsata osaksi repoa
+- change moment to luxon
+- if bus view is scrolled revert scroll after some time
+- copy weather icons to this repository
+- add favicon

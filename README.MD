@@ -25,3 +25,6 @@ This project is a info screen page for displaying finnish major cities bus route
 - [Digitransit / HSL](https://digitransit.fi/en/developers/apis/) (GraphQL)
 - [Giphy API](https://developers.giphy.com/) 
     - to display memes during hard times (errors)
+
+## Contributing
+[Things to do](./todo.txt)
