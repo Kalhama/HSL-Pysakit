@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { GiphyFetch } from '@giphy/js-fetch-api'
+import { giphyApiKey } from '../../env'
 
 const random = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -39,8 +40,7 @@ export function GiphyProvider({ search }) {
 
     useEffect(() => {
         function fetch() {
-            const APIKEY = 'V0MCJ5vJGQi10bvlxwRSXvJb3SELk3Vv'
-            const gf = new GiphyFetch(APIKEY)
+            const gf = new GiphyFetch(giphyApiKey)
 
             const options = { type: 'gifs', limit: 50, offset }
 

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import moment from 'moment'
 import { useQuery, gql } from '@apollo/client'
 import { GiphyProvider } from './Giphy'
+import { hslBusStopId } from '../../env'
 
 function HSL({ stoptimesWithoutPatterns }) {
     if (stoptimesWithoutPatterns.length === 0) {
@@ -46,11 +47,9 @@ function HSL({ stoptimesWithoutPatterns }) {
     )
 }
 
-const STOP_ID = 2323251
-
 const STOP_DATA = gql`
     {
-        stop(id: "HSL:${STOP_ID}") {
+        stop(id: "HSL:${hslBusStopId}") {
             name
             stoptimesWithoutPatterns(numberOfDepartures: 8) {
                 realtimeDeparture

@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import moment from 'moment'
 import { useState, useEffect } from 'react'
 import * as axios from 'axios'
+import { weatherApiKey, weatherLocation } from '../../env'
 
 function Weather({ data }) {
     const { current, hourly } = data
@@ -43,13 +44,9 @@ export function WeatherProvider() {
 
     useEffect(() => {
         function fecth() {
-            const LAT = '60.169903'
-            const LON = '24.730005'
-
-            const APIKEY = '15fe2abc4ca97e419a302be45816f900'
             axios
                 .get(
-                    `https://api.openweathermap.org/data/2.5/onecall?lat=${LAT}&lon=${LON}&exclude=daily,minutely&appid=${APIKEY}`
+                    `https://api.openweathermap.org/data/2.5/onecall?lat=${weatherLocation.lat}&lon=${weatherLocation.lon}&exclude=daily,minutely&appid=${weatherApiKey}`
                 )
                 .then((res) => setData({ data: res.data, loading: false, error: undefined }))
                 .catch((error) => setData({ error }))
