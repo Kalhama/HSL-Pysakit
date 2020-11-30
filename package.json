@@ -1,8 +1,8 @@
 {
-  "name": "eteisen-infonaytto",
+  "name": "hsl-weather",
   "version": "1.0.0",
-  "repository": "https://bitbucket.org/maxkalhama/eteisen-infonaytto/",
-  "author": "Felix Bade",
+  "repository": "https://github.com/Kalhama/hsl-weather",
+  "author": "Max Kalhama",
   "license": "UNLICENSED",
   "private": true,
   "husky": {
