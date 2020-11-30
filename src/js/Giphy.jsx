@@ -62,7 +62,7 @@ export function GiphyProvider({ search }) {
 
         fetch()
 
-        const interval = setInterval(fetch, 10 * 60 * 1000)
+        const interval = setInterval(fetch, 5 * 60 * 1000)
 
         return function cleanup() {
             clearInterval(interval)
