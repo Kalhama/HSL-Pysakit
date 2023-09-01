@@ -1,33 +1,61 @@
-/* eslint-disable */
-
-var path = require('path')
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-undef */
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { EnvironmentPlugin } = require('webpack')
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin')
+const TerserPlugin = require("terser-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const webpack = require("webpack");
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env, argv) => {
+    const { mode } = argv
+
     return {
-        entry: ['babel-polyfill', './src/main.js'],
+        entry: path.join(__dirname, 'src', 'Root.tsx'),
         output: {
-            path: path.resolve(__dirname, './build'),
-            filename: 'main.js',
-            publicPath: '/'
+            path: path.resolve(__dirname, 'dist'),
+            publicPath: '/',
+            assetModuleFilename: mode === 'development' ? 'assets/[name][ext][query]' : 'assets/[hash][ext][query]'
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                template: path.join(__dirname, 'src', 'index.html')
+            }),
+            new MiniCssExtractPlugin(),
+            new webpack.HotModuleReplacementPlugin(),
+            // new BundleAnalyzerPlugin()
+        ],
+        resolve: {
+            extensions: ['.json', '.tsx', '.ts', '.js']
         },
         module: {
             rules: [
                 {
-                    test: /\.jsx?$/,
-                    loader: 'babel-loader',
-                    exclude: /node_modules/
+                    test: /\.?jsx$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env', '@babel/preset-react']
+                        }
+                    }
                 },
                 {
-                    test: /\.s?[ac]ss$/i, // matches also .ass files :D
+                    test: /\.tsx?$/,
+                    exclude: /node_modules/,
+                    use: [
+                        {
+                            loader: 'ts-loader',
+                        }
+                    ]
+                },
+                {
+                    test: /\.s[ac]ss$/i,
                     use: [
                         // Creates `style` nodes from JS strings
-                        // false || process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
-                        MiniCssExtractPlugin.loader,
+                        'style-loader',
+                        // Translates CSS into CommonJS
                         {
                             loader: 'css-loader',
                             options: {
@@ -35,48 +63,29 @@ module.exports = (env, argv) => {
                             }
                         },
                         {
-                            loader: 'resolve-url-loader',
-                            options: { sourceMap: true }
-                        },
-                        // Compiles Sass to CSS
-                        {
                             loader: 'sass-loader',
                             options: {
                                 sourceMap: true
                             }
                         }
+                        // Compiles Sass to CSS
                     ]
                 },
                 {
-                    test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                    loader: 'url-loader?limit=10000&mimetype=application/font-woff'
-                },
-                {
-                    test: /\.(otf|ttf|eot|svg|png|jpe?g|gif)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                    loader: 'file-loader'
+                    test: /\.png/,
+                    type: 'asset/resource'
                 }
             ]
         },
-        resolve: {
-            extensions: ['.js', '.jsx']
-        },
-        plugins: [
-            new CleanWebpackPlugin(),
-            new MiniCssExtractPlugin(),
-            new CopyPlugin([
-                {
-                    from: '**/*',
-                    context: 'src/static'
-                }
-            ]),
-            new EnvironmentPlugin({
-                NODE_ENV: env || 'production', // use 'production' unless process.env.NODE_ENV is defined
-            })
-        ],
-        devtool: 'source-map',
         devServer: {
-            contentBase: path.join(__dirname, 'public'),
+            hot: true,
             historyApiFallback: true
-        }
+        },
+        optimization: {
+            minimize: mode !== 'development',
+            minimizer: [new TerserPlugin(), new CssMinimizerPlugin(),],
+        },
+        mode: mode === 'development' ? 'development' : 'production'
     }
 }
+

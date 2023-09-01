@@ -1,27 +1,38 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es6": true,
-        "node": true,
+        "es2021": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:prettier/recommended"
+        "standard-with-typescript",
+        "plugin:react/recommended"
     ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
+    "overrides": [
+        {
+            "env": {
+                "node": true
+            },
+            "files": [
+                ".eslintrc.{js,cjs}"
+            ],
+            "parserOptions": {
+                "sourceType": "script"
+            }
+        }
+    ],
     "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
+        "ecmaVersion": "latest",
+        "sourceType": "module",
+        "project": ["tsconfig.json"]
     },
+    "plugins": [
+        "react"
+    ],
     "rules": {
-        "no-param-reassign": "off",
-        "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-        "no-var": "error",
-        "prefer-const": "error",
-        "react/prop-types": ["off"]
+        "indent": ["error", 4],
+        "@typescript-eslint/indent": ["error", 4],
+        "eslint@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/explicit-function-return-type": 0,
+        "@typescript-eslint/strict-boolean-expressions": 0
     }
-};
+}

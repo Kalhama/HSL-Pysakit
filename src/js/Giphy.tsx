@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { GiphyFetch } from '@giphy/js-fetch-api'
+import { IGif } from '@giphy/js-types'
+
 import { giphyApiKey } from '../../env'
 
-const random = (min, max) => {
+const random = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-function Giphy({ images }) {
-    const [gif, selectGif] = useState()
+function Giphy({ images }: {images: IGif[]}) {
+    const [gif, selectGif] = useState('')
 
     useEffect(() => {
         const selectRandomGif = () => {
@@ -30,21 +32,21 @@ function Giphy({ images }) {
     return <video autoPlay={true} loop={true} src={gif} />
 }
 
-export function GiphyProvider({ search }) {
+
+
+export function GiphyProvider({ search }: { search?: string }) {
     const [offset, setOffset] = useState(0)
-    const [result, setData] = useState({
+    const [result, setData] = useState<{loading: boolean, error?: string, data: IGif[] }>({
         loading: true,
         error: undefined,
-        data: undefined
+        data: []
     })
 
     useEffect(() => {
         function fetch() {
             const gf = new GiphyFetch(giphyApiKey)
 
-            const options = { type: 'gifs', limit: 50, offset }
-
-            const gfPromise = search ? gf.search(search, options) : gf.search('meme', options)
+            const gfPromise = search ? gf.search(search) : gf.search('meme')
 
             gfPromise
                 .then((res) => {
@@ -56,7 +58,7 @@ export function GiphyProvider({ search }) {
                     setData({ data: res.data, loading: false, error: undefined })
                 })
                 .catch((error) => {
-                    setData({ error })
+                    setData({ error: 'error with loading gif', loading: false, data: [] })
                 })
         }
 

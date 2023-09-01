@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react'
 import moment from 'moment'
 import { useState, useEffect } from 'react'
-import * as axios from 'axios'
+import Axios from 'axios'
 import { weatherApiKey, weatherLocation } from '../../env'
 
-function Weather({ data }) {
+function Weather({ data }: {data: any}) {
     const { current, hourly } = data
     return (
         <Fragment>
             <Hour time={'NYT'} icon={current.weather.icon} temp={current.temp} />
-            {hourly.map((hour) => {
+            {hourly.map((hour: any) => {
                 const weekdayletter = moment(hour.dt).format('dd')[0].toUpperCase()
                 const format = moment(hour.dt).day() === moment().day() ? 'HH' : `[${weekdayletter} ]HH`
                 return (
@@ -25,7 +25,7 @@ function Weather({ data }) {
     )
 }
 
-function Hour({ time, icon, temp }) {
+function Hour({ time, icon, temp }: {time: string, icon: string, temp: number}) {
     return (
         <div className="hour">
             <span>{time}</span>
@@ -36,7 +36,11 @@ function Hour({ time, icon, temp }) {
 }
 
 export function WeatherProvider() {
-    const [result, setData] = useState({
+    const [result, setData] = useState<{
+        loading: boolean,
+        error?: string,
+        data: any
+    }>({
         loading: true,
         error: undefined,
         data: undefined
@@ -44,12 +48,12 @@ export function WeatherProvider() {
 
     useEffect(() => {
         function fecth() {
-            axios
+            Axios
                 .get(
                     `https://api.openweathermap.org/data/2.5/onecall?lat=${weatherLocation.lat}&lon=${weatherLocation.lon}&exclude=daily,minutely&appid=${weatherApiKey}`
                 )
                 .then((res) => setData({ data: res.data, loading: false, error: undefined }))
-                .catch((error) => setData({ error }))
+                .catch((error) => setData({ error: 'Error in weather', loading: false, data: undefined }))
         }
 
         fecth()
@@ -68,18 +72,18 @@ export function WeatherProvider() {
 
     data.current.dt *= 1000
     data.current.weather = data.current.weather[0]
-    data.hourly = data.hourly.map((hour) => {
+    data.hourly = data.hourly.map((hour: any) => {
         hour.dt *= 1000
         hour.weather = hour.weather[0]
         return hour
     })
 
     data.hourly = data.hourly
-        .filter((hour) => {
+        .filter((hour: any) => {
             // filter upcoming hours away if its closer than 50min away. We display current weather anyway
             return moment(hour.dt).diff(moment(), 'minutes') > 50
         })
-        .filter((hour) => {
+        .filter((hour: any) => {
             // every second hour away if its night or if its more than 12 hours away
             const h = moment(hour.dt).hour()
 

@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client'
 import { GiphyProvider } from './Giphy'
 import { hslBusStopId } from '../../env'
 
-function HSL({ stoptimesWithoutPatterns }) {
+function HSL({ stoptimesWithoutPatterns, stopName }: {stoptimesWithoutPatterns: any, stopName: string}) {
     if (stoptimesWithoutPatterns.length === 0) {
         return (
             <Fragment>
@@ -17,7 +17,7 @@ function HSL({ stoptimesWithoutPatterns }) {
     return (
         <table>
             <tbody>
-                {stoptimesWithoutPatterns.map((stoptime) => {
+                {stoptimesWithoutPatterns.map((stoptime: any) => {
                     const departureIn = moment(stoptime.realtimeDeparture)
                         .subtract(20, 'seconds')
                         .diff(moment(), 'minutes')
@@ -83,7 +83,7 @@ export function HSLProvider() {
             </div>
         )
 
-    const stoptimesWithoutPatterns = data.stop.stoptimesWithoutPatterns.map((stoptime) => {
+    const stoptimesWithoutPatterns = data.stop.stoptimesWithoutPatterns.map((stoptime: any) => {
         return {
             realtime: stoptime.realtime,
             shortName: stoptime.trip.route.shortName,
