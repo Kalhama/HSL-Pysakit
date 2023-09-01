@@ -5,3 +5,4 @@ export const weatherLocation = {
     lon: '24.730005'
 }
 export const giphyApiKey = 'V0MCJ5vJGQi10bvlxwRSXvJb3SELk3Vv'
+export const HSL_API_KEY = 'c528852987834cdbbb29768846fd6f5e'

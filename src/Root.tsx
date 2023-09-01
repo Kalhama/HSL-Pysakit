@@ -8,11 +8,12 @@ import { WeatherProvider } from './js/Weather'
 import moment from 'moment'
 import { Kitty } from './js/Kitty'
 import './style/style.scss'
+import { HSL_API_KEY } from '../env'
 
 moment.locale('fi')
 
 const client = new ApolloClient({
-    uri: 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql',
+    uri: `https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql?digitransit-subscription-key=${HSL_API_KEY}`,
     cache: new InMemoryCache()
 })
 
