@@ -2,9 +2,8 @@ import React, { Fragment } from 'react'
 import moment from 'moment'
 import { useQuery, gql } from '@apollo/client'
 import { GiphyProvider } from './Giphy'
-import { hslBusStopId } from '../../env'
 
-function HSL({ stoptimesWithoutPatterns, stopName }: {stoptimesWithoutPatterns: any, stopName: string}) {
+function HSL ({ stoptimesWithoutPatterns, stopName }: { stoptimesWithoutPatterns: any, stopName: string }) {
     if (stoptimesWithoutPatterns.length === 0) {
         return (
             <Fragment>
@@ -47,9 +46,9 @@ function HSL({ stoptimesWithoutPatterns, stopName }: {stoptimesWithoutPatterns: 
     )
 }
 
-const STOP_DATA = gql`
+const STOP_DATA = (stopid: string) => gql`
     {
-        stop(id: "HSL:${hslBusStopId}") {
+        stop(id: "HSL:${stopid}") {
             name
             stoptimesWithoutPatterns(numberOfDepartures: 8) {
                 realtimeDeparture
@@ -66,22 +65,32 @@ const STOP_DATA = gql`
     }
 `
 
-export function HSLProvider() {
-    const { loading, error, data } = useQuery(STOP_DATA, { pollInterval: 10 * 1000 })
+export function HSLProvider ({ stopid }: { stopid: string }) {
+    const { loading, error, data } = useQuery(STOP_DATA(stopid), { pollInterval: 10 * 1000 })
 
-    if (loading)
+    if (loading) {
         return (
             <div id="hsl">
                 <h2>Loading...</h2>
             </div>
         )
-    if (error)
+    }
+    if (error) {
         return (
             <div id="hsl">
                 <h2>Error with HSL API :(</h2>
                 <GiphyProvider search={'error'} />
             </div>
         )
+    }
+    if (!data.stop) {
+        return (
+            <div id="hsl">
+                <h2>No bus stop data</h2>
+                <GiphyProvider search={'404'} />
+            </div>
+        )
+    }
 
     const stoptimesWithoutPatterns = data.stop.stoptimesWithoutPatterns.map((stoptime: any) => {
         return {

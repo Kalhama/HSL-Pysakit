@@ -72,7 +72,7 @@ module.exports = (env, argv) => {
                     ]
                 },
                 {
-                    test: /\.png/,
+                    test: /\.(png|geojson)/,
                     type: 'asset/resource'
                 }
             ]

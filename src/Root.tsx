@@ -1,33 +1,24 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { HSLProvider } from './js/HSL'
-import { Clock } from './js/Clock'
-import { ApolloProvider } from '@apollo/client'
-import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { WeatherProvider } from './js/Weather'
 import moment from 'moment'
-import { Kitty } from './js/Kitty'
 import './style/style.scss'
-import { HSL_API_KEY } from '../env'
+import { StopPicker } from './components/StopPicker'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Stop } from './components/Stop'
 
 moment.locale('fi')
 
-const client = new ApolloClient({
-    uri: `https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql?digitransit-subscription-key=${HSL_API_KEY}`,
-    cache: new InMemoryCache()
-})
-
-export default class App extends React.Component {
-    render() {
-        return (
-            <ApolloProvider client={client}>
-                <Clock />
-                <HSLProvider />
-                <WeatherProvider />
-                <Kitty />
-            </ApolloProvider>
-        )
-    }
+export const App = () => {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route index element={<StopPicker />} />
+                <Route path="/stop/:stopid" element={<Stop />} />
+            </Routes>
+        </BrowserRouter>
+    )
 }
-
-ReactDOM.render(<App />, document.getElementById('root'))
+const container = document.getElementById('root')
+if (!container) throw new Error('Cound not find a root element')
+const root = createRoot(container)
+root.render(<App />)

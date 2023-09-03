@@ -1,10 +1,9 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import moment from 'moment'
-import { useState, useEffect } from 'react'
 import Axios from 'axios'
-import { weatherApiKey, weatherLocation } from '../../env'
+import { weatherApiKey } from '../../env'
 
-function Weather({ data }: {data: any}) {
+function Weather ({ data }: { data: any }) {
     const { current, hourly } = data
     return (
         <Fragment>
@@ -25,7 +24,7 @@ function Weather({ data }: {data: any}) {
     )
 }
 
-function Hour({ time, icon, temp }: {time: string, icon: string, temp: number}) {
+function Hour ({ time, icon, temp }: { time: string, icon: string, temp: number }) {
     return (
         <div className="hour">
             <span>{time}</span>
@@ -35,10 +34,10 @@ function Hour({ time, icon, temp }: {time: string, icon: string, temp: number}) 
     )
 }
 
-export function WeatherProvider() {
+export function WeatherProvider ({ lat, lng }: { lat?: string | null, lng?: string | null }) {
     const [result, setData] = useState<{
-        loading: boolean,
-        error?: string,
+        loading: boolean
+        error?: string
         data: any
     }>({
         loading: true,
@@ -47,20 +46,20 @@ export function WeatherProvider() {
     })
 
     useEffect(() => {
-        function fecth() {
+        function fecth () {
             Axios
                 .get(
-                    `https://api.openweathermap.org/data/2.5/onecall?lat=${weatherLocation.lat}&lon=${weatherLocation.lon}&exclude=daily,minutely&appid=${weatherApiKey}`
+                    `https://api.openweathermap.org/data/2.5/onecall?lat=${lat ?? '60.16952'}&lon=${lng ?? '24.93545'}&exclude=daily,minutely&appid=${weatherApiKey}`
                 )
-                .then((res) => setData({ data: res.data, loading: false, error: undefined }))
-                .catch((error) => setData({ error: 'Error in weather', loading: false, data: undefined }))
+                .then((res) => { setData({ data: res.data, loading: false, error: undefined }) })
+                .catch(() => { setData({ error: 'Error in weather', loading: false, data: undefined }) })
         }
 
         fecth()
 
         const interval = setInterval(fecth, 5 * 60 * 1000)
 
-        return function cleanup() {
+        return function cleanup () {
             clearInterval(interval)
         }
     }, [])
