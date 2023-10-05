@@ -1,7 +1,7 @@
-$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
-@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
-@import "~@fortawesome/fontawesome-free/scss/solid.scss";
-@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+// $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+// @import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+// @import "~@fortawesome/fontawesome-free/scss/solid.scss";
+// @import "~@fortawesome/fontawesome-free/scss/regular.scss";
 @import "~normalize.css/normalize.css";
 
 $dark-blue: #007AC8;
@@ -11,6 +11,23 @@ $white: white;
 @font-face {
     font-family: 'Hero';
     src: url("Hero/hero.otf") format("opentype");
+}
+
+.leaflet-container {
+    height: 100vh;
+}
+
+.map-loading {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background: rgba(47, 47, 47, 0.88);
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 body {
