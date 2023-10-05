@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-      "baseUrl": "./",
+      "baseUrl": "./src",
       "jsx": "react",
       "module": "commonjs",
       "noImplicitAny": true,
@@ -10,11 +10,10 @@
       "sourceMap": true,
       "target": "es5",
       "esModuleInterop": true,
-      "strictNullChecks": true,
-      "lib": ["DOM","ESNext"]
+      "strictNullChecks": true
     },
     "include": [
-      "./**/**/*"
+      "./src/**/**/*"
     ]
 
   }

@@ -1,1 +1,1 @@
-declare module '*.geojson';
+declare module '*.geojson?url';

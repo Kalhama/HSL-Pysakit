@@ -1,6 +1,6 @@
+import './style/style.scss'
 import React from 'react'
 import moment from 'moment'
-import './style/style.scss'
 import { StopPicker } from './components/StopPicker'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Marker, Popup, MapContainer, TileLayer } from 'react-leaflet'
 
-import stopsurl from '../HSL_pysakit_kevat2018.geojson'
+import stopsurl from '../HSL_pysakit_kevat2018.geojson?url'
 import { type LatLngTuple } from 'leaflet'
 
 interface IStop {
@@ -45,6 +45,7 @@ export const StopPicker = () => {
             .then(async (response) => await response.json())
             .then(res => res.features as IStop[])
             .then((stops) => {
+                console.log(stops)
                 setFields(stops)
                 setLoading(false)
             })
