@@ -3,7 +3,7 @@
 HSL pysäkit on infosivusto, joka näyttää pikanäkymässä suosikkibussipysäkkisi tiedot, sään ja kellonajan. 🚌☀️🕒
 
 <div style="text-align: center;">
-    <img src="/examples/mockup.png>" width="70%" />
+    <img src="/examples/mockup.png" width="70%" />
 </div>
 
 ## Live-esimerkki
