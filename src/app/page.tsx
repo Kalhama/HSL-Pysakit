@@ -3,6 +3,7 @@ import { Marker, Popup, MapContainer, TileLayer } from 'react-leaflet'
 
 import stopsurl from '../HSL_pysakit_kevat2018.geojson?url'
 import { type LatLngTuple } from 'leaflet'
+import { Loader2 } from 'lucide-react'
 
 interface IStop {
   type: 'Feature'
@@ -67,11 +68,12 @@ export const StopPicker = () => {
   return (
     <div>
       {loading && (
-        <div className="map-loading">
+        <div className="absolute top-0 z-50 flex h-full w-full items-center justify-center bg-[#474747aa] text-xl">
           <span>Loading</span>
+          <Loader2 className="ml-1 h-4 w-4 animate-spin" />
         </div>
       )}
-      <MapContainer center={[60.16952, 24.93545]} zoom={13}>
+      <MapContainer className="h-screen" center={[60.16952, 24.93545]} zoom={13}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

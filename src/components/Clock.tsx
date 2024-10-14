@@ -12,8 +12,8 @@ export function Clock() {
   })
 
   return (
-    <div id="clock">
-      <h2>{moment(date).format('D. MMMM[ta] - HH:mm')}</h2>
+    <div className="border-b border-b-white font-medium">
+      <h2 className="py-4 text-center text-3xl">{moment(date).format('D. MMMM[ta] - HH:mm')}</h2>
     </div>
   )
 }

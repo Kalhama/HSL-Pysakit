@@ -15,6 +15,6 @@ export function Kitty() {
     }
   }, [])
 
-  if (visible) return <div id="kitty"></div>
+  if (visible) return <img src="/kitty.gif" className="fixed bottom-36 right-0 h-48" />
   else return null
 }

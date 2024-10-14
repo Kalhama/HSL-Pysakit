@@ -1,28 +1,28 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import Axios from 'axios'
 import { weatherApiKey } from '../../env'
 
 function Weather({ data }: { data: any }) {
   const { current, hourly } = data
+
   return (
-    <Fragment>
-      <Hour time={'NYT'} icon={current.weather.icon} temp={current.temp} />
-      {hourly.map((hour: any) => {
+    <div className="fixed bottom-0 flex w-full gap-2 overflow-x-scroll border-t border-white bg-hsl-608 p-2">
+      {[current, ...hourly].map((hour: any) => {
         const weekdayletter = moment(hour.dt).format('dd')[0].toUpperCase()
         const format = moment(hour.dt).day() === moment().day() ? 'HH' : `[${weekdayletter} ]HH`
-        return <Hour key={hour.dt} time={moment(hour.dt).format(format)} icon={hour.weather.icon} temp={hour.temp} />
-      })}
-    </Fragment>
-  )
-}
 
-function Hour({ time, icon, temp }: { time: string; icon: string; temp: number }) {
-  return (
-    <div className="hour">
-      <span>{time}</span>
-      <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} />
-      <span className="temperature">{Math.round(temp - 273.16)}°</span>
+        return (
+          <div key={hour.dt} className="flex flex-col flex-nowrap">
+            <span className="text-center">{moment(hour.dt).format(format)}</span>
+            <img
+              className="-mx-3 -my-6 max-w-none flex-grow"
+              src={`http://openweathermap.org/img/wn/${hour.weather.icon}@2x.png`}
+            />
+            <span className="mt-1 text-center text-xl">{Math.round(hour.temp - 273.16)}°</span>
+          </div>
+        )
+      })}
     </div>
   )
 }
@@ -62,8 +62,8 @@ export function WeatherProvider({ lat, lng }: { lat?: string | null; lng?: strin
 
   const { loading, error, data } = result
 
-  if (loading) return <div id="weather">Loading...</div>
-  if (error) return <div id="weather">Error :(</div>
+  if (loading) return <div className="fixed bottom-0 w-full bg-hsl-608 p-2">Loading...</div>
+  if (error) return <div className="fixed bottom-0 w-full bg-hsl-608 p-2">Error :(</div>
 
   data.current.dt *= 1000
   data.current.weather = data.current.weather[0]
@@ -89,9 +89,5 @@ export function WeatherProvider({ lat, lng }: { lat?: string | null; lng?: strin
       }
     })
 
-  return (
-    <div id="weather">
-      <Weather data={data} />
-    </div>
-  )
+  return <Weather data={data} />
 }
