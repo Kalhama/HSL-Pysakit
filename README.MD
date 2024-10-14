@@ -1,30 +1,39 @@
-# HSLWeather
-This project is a info screen page for displaying finnish major cities bus routes, weather and a clock on a any screen.
+# HSL Pysäkit
 
-## Live example
-- Visit https://hslweather.max.kalhama.fi
+HSL pysäkit on infosivusto, joka näyttää pikanäkymässä suosikkibussipysäkkisi tiedot, sään ja kellonajan. 🚌☀️🕒
 
-## Developing
+<div style="text-align: center;">
+    <img src="/examples/mockup.png>" width="70%" />
+</div>
 
-1. install node.js 
-    - https://nodejs.org/en/
-2. install yarn 
-    - https://classic.yarnpkg.com/en/docs/install
-3. navigate to project root
-4. run `yarn install` to install dependencies
-5. run `yarn start` to start development server locally
+## Live-esimerkki
 
-## Production
-1. run `yarn build` to create production build. Build files will be in `build/` folder
+-   Vieraile osoitteessa: [hslweather.max.kalhama.fi](https://hslweather.max.kalhama.fi)
 
-## Configuring
-- environment variables are located inside [env.js](./env.js)
+## Kehittäminen
 
-## External API's used
-- [Open Weather API](https://openweathermap.org/api)
-- [Digitransit / HSL](https://digitransit.fi/en/developers/apis/) (GraphQL)
-- [Giphy API](https://developers.giphy.com/) 
-    - to display memes during hard times (errors)
+1. Asenna Node.js
+    - [Node.js asennus](https://nodejs.org/en/)
+2. Asenna Yarn
+    - [Yarn asennus](https://classic.yarnpkg.com/en/docs/install)
+3. Siirry projektin juurihakemistoon
+4. Suorita `yarn install` asentaaksesi riippuvuudet
+5. Suorita `yarn start` käynnistääksesi kehityspalvelimen paikallisesti
 
-## Contributing
-[Things to do](./todo.txt)
+## Tuotantoversio
+
+1. Suorita `yarn build` luodaksesi tuotantoversion. Rakennetut tiedostot löytyvät `build/`-kansiosta 📁
+
+## Lokaalit määritykset
+
+-   Ympäristömuuttujat löytyvät tiedostosta [env.js](./env.js)
+
+## Käytetyt ulkoiset rajapinnat
+
+-   [Open Weather API](https://openweathermap.org/api)
+-   [Digitransit / HSL](https://digitransit.fi/en/developers/apis/)
+-   [Giphy API](https://developers.giphy.com/)
+
+## Kehitykseen osallistuminen
+
+Katso avoimet ongelmat: [Github Issues](https://github.com/Kalhama/HSL-Pysakit/issues) ✍️
