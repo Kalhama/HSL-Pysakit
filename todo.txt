@@ -1,4 +1,0 @@
-- change moment to luxon
-- if bus view is scrolled revert scroll after some time
-- copy weather icons to this repository
-- add favicon

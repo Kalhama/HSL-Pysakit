@@ -8,14 +8,14 @@ HSL pysäkit on infosivusto, joka näyttää pikanäkymässä suosikkibussipysä
 
 ## Live-esimerkki
 
--   Vieraile osoitteessa: [hslweather.max.kalhama.fi](https://hslweather.max.kalhama.fi)
+- Vieraile osoitteessa: [hslweather.max.kalhama.fi](https://hslweather.max.kalhama.fi)
 
 ## Kehittäminen
 
 1. Asenna Node.js
-    - [Node.js asennus](https://nodejs.org/en/)
+   - [Node.js asennus](https://nodejs.org/en/)
 2. Asenna Yarn
-    - [Yarn asennus](https://classic.yarnpkg.com/en/docs/install)
+   - [Yarn asennus](https://classic.yarnpkg.com/en/docs/install)
 3. Siirry projektin juurihakemistoon
 4. Suorita `yarn install` asentaaksesi riippuvuudet
 5. Suorita `yarn start` käynnistääksesi kehityspalvelimen paikallisesti
@@ -26,13 +26,13 @@ HSL pysäkit on infosivusto, joka näyttää pikanäkymässä suosikkibussipysä
 
 ## Lokaalit määritykset
 
--   Ympäristömuuttujat löytyvät tiedostosta [env.js](./env.js)
+- Ympäristömuuttujat löytyvät tiedostosta [env.js](./env.js)
 
 ## Käytetyt ulkoiset rajapinnat
 
--   [Open Weather API](https://openweathermap.org/api)
--   [Digitransit / HSL](https://digitransit.fi/en/developers/apis/)
--   [Giphy API](https://developers.giphy.com/)
+- [Open Weather API](https://openweathermap.org/api)
+- [Digitransit / HSL](https://digitransit.fi/en/developers/apis/)
+- [Giphy API](https://developers.giphy.com/)
 
 ## Kehitykseen osallistuminen
 
