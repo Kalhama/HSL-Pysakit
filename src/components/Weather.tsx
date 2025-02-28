@@ -17,7 +17,7 @@ function Weather({ data }: { data: any }) {
             <span className="text-center">{moment(hour.dt).format(format)}</span>
             <img
               className="-mx-3 -my-6 max-w-none flex-grow"
-              src={`http://openweathermap.org/img/wn/${hour.weather.icon}@2x.png`}
+              src={`/open-weather-map-icons/${hour.weather.icon}_t@2x.png`}
             />
             <span className="mt-1 text-center text-xl">{Math.round(hour.temp - 273.16)}°</span>
           </div>
