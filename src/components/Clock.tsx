@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import moment from 'moment'
+import { format } from 'date-fns'
+import { fi } from 'date-fns/locale'
 
 export function Clock() {
   const [date, setDate] = useState(new Date())
@@ -13,7 +14,7 @@ export function Clock() {
 
   return (
     <div className="border-b border-b-white font-medium">
-      <h2 className="py-4 text-center text-3xl">{moment(date).format('D. MMMM[ta] - HH:mm')}</h2>
+      <h2 className="py-4 text-center text-3xl">{format(date, "d. MMMM - HH:mm", { locale: fi })}</h2>
     </div>
   )
 }

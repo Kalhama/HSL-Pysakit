@@ -1,12 +1,9 @@
 import './style/style.scss'
 import React from 'react'
-import moment from 'moment'
 import { StopPicker } from './app/page'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Stop } from './app/stop/[id]/page'
-
-moment.locale('fi')
 
 export const App = () => {
   return (

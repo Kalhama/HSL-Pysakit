@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import moment from 'moment'
+import { format, isSameDay, differenceInMinutes, differenceInHours, getHours } from 'date-fns'
+import { fi } from 'date-fns/locale'
 import Axios from 'axios'
 import { weatherApiKey } from '../../env'
 
@@ -9,12 +10,13 @@ function Weather({ data }: { data: any }) {
   return (
     <div className="fixed bottom-0 flex w-full gap-2 overflow-x-scroll border-t border-white bg-hsl-608 p-2">
       {[current, ...hourly].map((hour: any) => {
-        const weekdayletter = moment(hour.dt).format('dd')[0].toUpperCase()
-        const format = moment(hour.dt).day() === moment().day() ? 'HH' : `[${weekdayletter} ]HH`
+        const hourDate = new Date(hour.dt)
+        const dayOfWeek = format(hourDate, 'EEEEE', { locale: fi })
+        const timeFormat = isSameDay(hourDate, new Date()) ? 'HH' : `'${dayOfWeek}' HH`
 
         return (
           <div key={hour.dt} className="flex flex-col flex-nowrap">
-            <span className="text-center">{moment(hour.dt).format(format)}</span>
+            <span className="text-center">{format(hourDate, timeFormat, { locale: fi })}</span>
             <img
               className="-mx-3 -my-6 max-w-none flex-grow"
               src={`/open-weather-map-icons/${hour.weather.icon}_t@2x.png`}
@@ -76,13 +78,14 @@ export function WeatherProvider({ lat, lng }: { lat?: string | null; lng?: strin
   data.hourly = data.hourly
     .filter((hour: any) => {
       // filter upcoming hours away if its closer than 50min away. We display current weather anyway
-      return moment(hour.dt).diff(moment(), 'minutes') > 50
+      return differenceInMinutes(new Date(hour.dt), new Date()) > 50
     })
     .filter((hour: any) => {
       // every second hour away if its night or if its more than 12 hours away
-      const h = moment(hour.dt).hour()
+      const hourDate = new Date(hour.dt)
+      const h = getHours(hourDate)
 
-      if (moment(hour.dt).diff(moment(), 'hours') >= 12) {
+      if (differenceInHours(hourDate, new Date()) >= 12) {
         return h % 2 === 0
       } else {
         return h >= 7 || h % 2 === 0

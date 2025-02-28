@@ -1,5 +1,5 @@
 import React from 'react'
-import moment from 'moment'
+import { differenceInMinutes, format } from 'date-fns'
 import { useQuery, gql } from '@apollo/client'
 import { GiphyProvider } from './Giphy'
 
@@ -16,7 +16,8 @@ function HSL({ stoptimesWithoutPatterns, stopName }: { stoptimesWithoutPatterns:
   return (
     <div>
       {stoptimesWithoutPatterns.map((stoptime: any) => {
-        const departureIn = moment(stoptime.realtimeDeparture).subtract(20, 'seconds').diff(moment(), 'minutes')
+        const departureTime = new Date(stoptime.realtimeDeparture - 20000) // subtract 20 seconds (20000ms)
+        const departureIn = differenceInMinutes(departureTime, new Date())
 
         let displayDepTime
 
@@ -25,7 +26,7 @@ function HSL({ stoptimesWithoutPatterns, stopName }: { stoptimesWithoutPatterns:
         } else if (departureIn <= 25) {
           displayDepTime = `${departureIn} min`
         } else {
-          displayDepTime = moment(stoptime.realtimeDeparture).format('HH:mm')
+          displayDepTime = format(new Date(stoptime.realtimeDeparture), 'HH:mm')
         }
 
         return (
