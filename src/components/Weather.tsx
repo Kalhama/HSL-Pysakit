@@ -41,7 +41,7 @@ export function WeatherProvider({ lat, lng }: { lat?: string | null; lng?: strin
   useEffect(() => {
     function fecth() {
       Axios.get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat ?? '60.16952'}&lon=${lng ?? '24.93545'}&exclude=daily,minutely&appid=${weatherApiKey}`
+        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat ?? '60.16952'}&lon=${lng ?? '24.93545'}&exclude=daily,minutely&appid=${weatherApiKey}`
       )
         .then((res) => {
           setData({ data: res.data, loading: false, error: undefined })
