@@ -9,7 +9,7 @@ import { useParams, useSearchParams } from 'react-router-dom'
 
 
 const client = new ApolloClient({
-  uri: `https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql?digitransit-subscription-key=${HSL_API_KEY}`,
+  uri: `https://api.digitransit.fi/routing/v2/hsl/gtfs/v1?digitransit-subscription-key=${HSL_API_KEY}`,
   cache: new InMemoryCache()
 })
 
