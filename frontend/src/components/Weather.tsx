@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { format, isSameDay, differenceInMinutes, differenceInHours, getHours } from 'date-fns'
 import { fi } from 'date-fns/locale'
 import Axios from 'axios'
-import { weatherApiKey } from '../../env'
+import { WEATHER_API_URL } from '../../env'
 
 function Weather({ data }: { data: any }) {
   const { current, hourly } = data
@@ -42,9 +42,11 @@ export function WeatherProvider({ lat, lng }: { lat?: string | null; lng?: strin
 
   useEffect(() => {
     function fecth() {
-      Axios.get(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat ?? '60.16952'}&lon=${lng ?? '24.93545'}&exclude=daily,minutely&appid=${weatherApiKey}`
-      )
+      const params = new URLSearchParams()
+      if (lat) params.set('lat', lat)
+      if (lng) params.set('lng', lng)
+
+      Axios.get(`${WEATHER_API_URL}/weather?${params.toString()}`)
         .then((res) => {
           setData({ data: res.data, loading: false, error: undefined })
         })
