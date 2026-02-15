@@ -1,16 +1,9 @@
 import React from 'react'
 import { differenceInMinutes, format } from 'date-fns'
 import { useQuery, gql } from '@apollo/client'
-import { GiphyProvider } from './Giphy'
-
 function HSL({ stoptimesWithoutPatterns, stopName }: { stoptimesWithoutPatterns: any; stopName: string }) {
   if (stoptimesWithoutPatterns.length === 0) {
-    return (
-      <>
-        <h2>No buses leaving next 60min</h2>
-        <GiphyProvider />
-      </>
-    )
+    return <h2>No buses leaving next 60min</h2>
   }
 
   return (
@@ -79,15 +72,9 @@ export function HSLProvider({ stopid }: { stopid: string }) {
       {loading ? (
         <h2>Loading</h2>
       ) : error ? (
-        <>
-          <h2>Error with HSL API :(</h2>
-          <GiphyProvider search={'error'} />
-        </>
+        <h2>Error with HSL API :(</h2>
       ) : !data.stop ? (
-        <>
-          <h2>No bus stop data</h2>
-          <GiphyProvider search={'404'} />
-        </>
+        <h2>No bus stop data</h2>
       ) : (
         <HSL stoptimesWithoutPatterns={stoptimesWithoutPatterns} stopName={data.stop.name} />
       )}

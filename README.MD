@@ -32,7 +32,6 @@ HSL pysäkit on infosivusto, joka näyttää pikanäkymässä suosikkibussipysä
 
 - [Open Weather API](https://openweathermap.org/api)
 - [Digitransit / HSL](https://digitransit.fi/en/developers/apis/)
-- [Giphy API](https://developers.giphy.com/)
 
 ## Kehitykseen osallistuminen
 
