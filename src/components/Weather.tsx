@@ -18,7 +18,9 @@ function Weather({ data }: { data: any }) {
           <div key={hour.dt} className="flex flex-col flex-nowrap">
             <span className="text-center">{format(hourDate, timeFormat, { locale: fi })}</span>
             <img
-              className="-mx-3 -my-6 max-w-none flex-grow"
+              className="-mx-3 -my-6 max-w-none aspect-square"
+              width={100}
+              height={100}
               src={`/open-weather-map-icons/${hour.weather.icon}_t@2x.png`}
             />
             <span className="mt-1 text-center text-xl">{Math.round(hour.temp - 273.16)}°</span>
