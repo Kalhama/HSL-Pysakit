@@ -1,6 +1,5 @@
 module.exports = {
   env: {
-    browser: true,
     es2021: true
   },
   extends: ['standard-with-typescript', 'plugin:react/recommended'],
@@ -13,12 +12,21 @@ module.exports = {
       parserOptions: {
         sourceType: 'script'
       }
+    },
+    {
+      files: ['packages/frontend/**/*.{ts,tsx}'],
+      env: { browser: true },
+      parserOptions: { project: ['packages/frontend/tsconfig.json'] }
+    },
+    {
+      files: ['packages/backend/**/*.ts'],
+      env: { node: true },
+      parserOptions: { project: ['packages/backend/tsconfig.json'] }
     }
   ],
   parserOptions: {
     ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['tsconfig.json']
+    sourceType: 'module'
   },
   plugins: ['react'],
   rules: {
