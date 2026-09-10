@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { format, isSameDay, differenceInMinutes, differenceInHours, getHours } from 'date-fns'
 import { fi } from 'date-fns/locale'
 import Axios from 'axios'
-import { weatherApiKey } from '../../env'
+import { weatherBackendUrl } from '../../env'
 
 function Weather({ data }: { data: any }) {
   const { current, hourly } = data
@@ -19,9 +19,9 @@ function Weather({ data }: { data: any }) {
             <span className="text-center">{format(hourDate, timeFormat, { locale: fi })}</span>
             <img
               className="-mx-3 -my-6 max-w-none flex-grow"
-              src={`/open-weather-map-icons/${hour.weather.icon}_t@2x.png`}
+              src={`/open-weather-map-icons/${hour.icon}_t@2x.png`}
             />
-            <span className="mt-1 text-center text-xl">{Math.round(hour.temp - 273.16)}°</span>
+            <span className="mt-1 text-center text-xl">{Math.round(hour.temp)}°</span>
           </div>
         )
       })}
@@ -42,9 +42,7 @@ export function WeatherProvider({ lat, lng }: { lat?: string | null; lng?: strin
 
   useEffect(() => {
     function fecth() {
-      Axios.get(
-        `https://api.openweathermap.org/data/3.0/onecall?lat=${lat ?? '60.16952'}&lon=${lng ?? '24.93545'}&exclude=daily,minutely&appid=${weatherApiKey}`
-      )
+      Axios.get(`${weatherBackendUrl}/weather?lat=${lat ?? '60.16952'}&lng=${lng ?? '24.93545'}`)
         .then((res) => {
           setData({ data: res.data, loading: false, error: undefined })
         })
@@ -66,14 +64,6 @@ export function WeatherProvider({ lat, lng }: { lat?: string | null; lng?: strin
 
   if (loading) return <div className="fixed bottom-0 w-full bg-hsl-608 p-2">Loading...</div>
   if (error) return <div className="fixed bottom-0 w-full bg-hsl-608 p-2">Error :(</div>
-
-  data.current.dt *= 1000
-  data.current.weather = data.current.weather[0]
-  data.hourly = data.hourly.map((hour: any) => {
-    hour.dt *= 1000
-    hour.weather = hour.weather[0]
-    return hour
-  })
 
   data.hourly = data.hourly
     .filter((hour: any) => {
